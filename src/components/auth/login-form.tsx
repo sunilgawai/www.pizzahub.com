@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
-import CardWrapper from "./card-wrapper";
 import { LoginSchema } from "@/schemas";
-import * as z from "zod";
 import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -14,7 +15,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+import CardWrapper from "./card-wrapper";
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -27,6 +28,7 @@ const LoginForm = () => {
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     console.log("values", values);
   };
+  
   return (
     <CardWrapper
       headerLable="Welcome Back"
@@ -68,6 +70,8 @@ const LoginForm = () => {
               )}
             />
           </div>
+          <FormError message="Error" />
+          <FormSuccess message="Successfull" />
           <Button type="submit" className="w-full">
             Continue
           </Button>
