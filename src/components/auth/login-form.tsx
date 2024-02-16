@@ -1,11 +1,12 @@
 "use client";
-
+import { useState, useTransition } from "react";
 import { LoginSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { Button } from "../ui/button";
+
 import {
   Form,
   FormControl,
@@ -16,8 +17,12 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import CardWrapper from "./card-wrapper";
+import { login } from "@/server/login";
 
 const LoginForm = () => {
+  const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string | undefined>("");
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof LoginSchema>>({
     defaultValues: {
       email: "",
@@ -27,8 +32,20 @@ const LoginForm = () => {
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
     console.log("values", values);
+    startTransition(() => {
+      const { errors, success } = login(values);
+      console.log("values", { error, success });
+      setError(errors as string);
+      // if (errors) setError(errors);
+      // if (success) setSuccess("Email Sent");
+      // setSuccess(success as string);
+
+      // .then((data) => {
+      //   console.log(data);
+      // })
+    });
   };
-  
+
   return (
     <CardWrapper
       headerLable="Welcome Back"
@@ -70,9 +87,9 @@ const LoginForm = () => {
               )}
             />
           </div>
-          <FormError message="Error" />
-          <FormSuccess message="Successfull" />
-          <Button type="submit" className="w-full">
+          <FormError message="" />
+          <FormSuccess message="" />
+          <Button type="submit" className="w-full" disabled={isPending}>
             Continue
           </Button>
         </form>
