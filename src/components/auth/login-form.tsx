@@ -1,12 +1,13 @@
 "use client";
-import { useState, useTransition } from "react";
 import { LoginSchema } from "@/schemas";
+import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { Button } from "../ui/button";
 
+import { loginUser } from "@/server/auth.actions";
 import {
   Form,
   FormControl,
@@ -17,12 +18,15 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import CardWrapper from "./card-wrapper";
-import { login } from "@/server/login";
+import { useToast } from "../ui/use-toast";
+import { ToastAction } from "../ui/toast";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
-  const [error, setError] = useState<string>("");
-  const [success, setSuccess] = useState<string | undefined>("");
-  const [isPending, startTransition] = useTransition();
+const LoginForm = ({ callbackUrl }: { callbackUrl?: string }) => {
+  const [isPending, setPending] = useState<boolean>(false);
+  const { toast } = useToast();
+  const router = useRouter();
   const form = useForm<z.infer<typeof LoginSchema>>({
     defaultValues: {
       email: "",
@@ -30,20 +34,35 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    console.log("values", values);
-    startTransition(() => {
-      const { errors, success } = login(values);
-      console.log("values", { error, success });
-      setError(errors as string);
-      // if (errors) setError(errors);
-      // if (success) setSuccess("Email Sent");
-      // setSuccess(success as string);
+  const onSubmit = async (values: z.infer<typeof LoginSchema>) => {
+    try {
+      setPending(true);
+      const result = await signIn("credentials", {
+        redirect: false,
+        username: values.email,
+        password: values.password,
+      });
+      console.log("result", result);
+      if (!result?.ok) {
+        toast({
+          title: "Login Failed.",
+          description: "Authentication Successfull.",
+          variant: "default",
+          action: <ToastAction altText="close toast">close</ToastAction>,
+        });
+        return;
+      }
 
-      // .then((data) => {
-      //   console.log(data);
-      // })
-    });
+      setPending(false);
+      router.push(callbackUrl ? callbackUrl : "/");
+    } catch (error) {
+      toast({
+        title: "Login Success.",
+        description: "Authentication Successfull.",
+        variant: "default",
+        action: <ToastAction altText="close toast">close</ToastAction>,
+      });
+    }
   };
 
   return (

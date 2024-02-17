@@ -4,7 +4,7 @@ import { LoginSchema, RegisterSchema } from "@/schemas";
 import { z } from "zod";
 import bcrypt from "bcrypt";
 
-export const login = (values: z.infer<typeof LoginSchema>) => {
+export const loginUser = (values: z.infer<typeof LoginSchema>) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {

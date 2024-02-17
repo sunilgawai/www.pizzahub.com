@@ -3,6 +3,7 @@ import { AuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db } from "./db";
 import bcrypt from "bcrypt";
+import { User } from "@prisma/client";
 
 export const authOptions: AuthOptions = {
     providers: [
@@ -37,5 +38,15 @@ export const authOptions: AuthOptions = {
                 return userwithoutpass;
             },
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({token, user}) {
+            if(user) token.user = user as User;
+            return token;
+        },
+        async session({token, session}) {
+            session.user = token.user;
+            return session;
+        },
+    }
 }

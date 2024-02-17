@@ -1,7 +1,7 @@
 "use client";
 
 import { RegisterSchema } from "@/schemas";
-import { registerUser } from "@/server/login";
+import { registerUser } from "@/server/auth.actions";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "../ui/button";
@@ -14,9 +14,9 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { ToastAction } from "../ui/toast";
 import { useToast } from "../ui/use-toast";
 import CardWrapper from "./card-wrapper";
-import { ToastAction } from "../ui/toast";
 
 const RegisterForm = () => {
   const { toast } = useToast();
@@ -34,10 +34,9 @@ const RegisterForm = () => {
     try {
       const result = await registerUser(values);
       console.log("result", result);
-      
     } catch (error) {
       toast({
-        title: "Login Success.",
+        title: "Register Success.",
         description: "Authentication Successfull.",
         variant: "default",
         action: <ToastAction altText="close toast">close</ToastAction>,
