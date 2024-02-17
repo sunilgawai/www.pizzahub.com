@@ -5,9 +5,12 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@auth/core':
+    specifier: ^0.27.0
+    version: 0.27.0(nodemailer@6.9.9)
   '@auth/prisma-adapter':
     specifier: ^1.4.0
-    version: 1.4.0(@prisma/client@5.9.1)
+    version: 1.4.0(@prisma/client@5.9.1)(nodemailer@6.9.9)
   '@hookform/resolvers':
     specifier: ^3.3.4
     version: 3.3.4(react-hook-form@7.50.1)
@@ -100,7 +103,7 @@ dependencies:
     version: 14.1.0(react-dom@18.2.0)(react@18.2.0)
   next-auth:
     specifier: ^4.24.6
-    version: 4.24.6(next@14.1.0)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.24.6(next@14.1.0)(nodemailer@6.9.9)(react-dom@18.2.0)(react@18.2.0)
   react:
     specifier: ^18
     version: 18.2.0
@@ -145,6 +148,9 @@ devDependencies:
   eslint-config-next:
     specifier: 14.1.0
     version: 14.1.0(eslint@8.56.0)(typescript@5.3.3)
+  nodemailer:
+    specifier: ^6.9.9
+    version: 6.9.9
   postcss:
     specifier: ^8
     version: 8.4.35
@@ -169,7 +175,7 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  /@auth/core@0.27.0:
+  /@auth/core@0.27.0(nodemailer@6.9.9):
     resolution: {integrity: sha512-3bydnRJIM/Al6mkYmb53MsC+6G8ojw3lLPzwgVnX4dCo6N2lrib6Wq6r0vxZIhuHGjLObqqtUfpeaEj5aeTHFg==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
@@ -187,17 +193,18 @@ packages:
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       jose: 5.2.2
+      nodemailer: 6.9.9
       oauth4webapi: 2.10.3
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
     dev: false
 
-  /@auth/prisma-adapter@1.4.0(@prisma/client@5.9.1):
+  /@auth/prisma-adapter@1.4.0(@prisma/client@5.9.1)(nodemailer@6.9.9):
     resolution: {integrity: sha512-k5D6ajX8MZv9107WWaIpzcNmsB8+sumyc7y46lnAMbLdgBoUcwAYtxGLbwEFSvzgjDcxjWqzlB5AIAED4vioDA==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
     dependencies:
-      '@auth/core': 0.27.0
+      '@auth/core': 0.27.0(nodemailer@6.9.9)
       '@prisma/client': 5.9.1(prisma@5.9.1)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
@@ -3257,7 +3264,7 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /next-auth@4.24.6(next@14.1.0)(react-dom@18.2.0)(react@18.2.0):
+  /next-auth@4.24.6(next@14.1.0)(nodemailer@6.9.9)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-djQt3ZEaWEIxcsuh3HTW2uuzLfXMRjHH+ugAsichlQSbH4iA5MRcgMA2HvTNvsDTDLh44tyU72+/gWsxgTbAKg==}
     peerDependencies:
       next: ^12.2.5 || ^13 || ^14
@@ -3273,6 +3280,7 @@ packages:
       cookie: 0.5.0
       jose: 4.15.4
       next: 14.1.0(react-dom@18.2.0)(react@18.2.0)
+      nodemailer: 6.9.9
       oauth: 0.9.15
       openid-client: 5.6.4
       preact: 10.19.5
@@ -3340,6 +3348,10 @@ packages:
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}
     dev: true
+
+  /nodemailer@6.9.9:
+    resolution: {integrity: sha512-dexTll8zqQoVJEZPwQAKzxxtFn0qTnjdQTchoU6Re9BUUGBJiOy3YMn/0ShTW6J5M0dfQ1NeDeRTTl4oIWgQMA==}
+    engines: {node: '>=6.0.0'}
 
   /nopt@5.0.0:
     resolution: {integrity: sha512-Tbj67rffqceeLpcRXrT7vKAN8CwfPeIBgM7E6iBkmKLV7bEMwpGgYLGv0jACUsECaa/vuxP0IjEont6umdMgtQ==}
