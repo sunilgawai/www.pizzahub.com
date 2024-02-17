@@ -1,6 +1,8 @@
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import AuthAvatar from "./auth/auth-avatar";
 
 export function SiteHeader() {
   return (
@@ -11,7 +13,7 @@ export function SiteHeader() {
           <span className="inline-block font-bold">Eat Fresh</span>
         </Link>
         <div className="flex flex-1 items-center justify-end space-x-4">
-          <nav className="flex items-center space-x-1">
+          <nav className="flex items-center space-x-4">
             <Link
               href={"/menus"}
               className="flex items-center text-base font-semibold text-muted-foreground mx-4"
@@ -38,16 +40,7 @@ export function SiteHeader() {
                 <Icons.cart className="h-5 w-5" />
               </div>
             </Link>
-            <Link href={"/account"}>
-              <div
-                className={buttonVariants({
-                  size: "icon",
-                  variant: "ghost",
-                })}
-              >
-                <Icons.user className="h-5 w-5" />
-              </div>
-            </Link>
+            <AuthAvatar />
             {/* <ThemeToggle /> */}
           </nav>
         </div>
