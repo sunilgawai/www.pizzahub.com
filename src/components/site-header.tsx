@@ -1,12 +1,11 @@
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import AuthAvatar from "./auth/auth-avatar";
 
 export function SiteHeader() {
   return (
-    <header className="bg-white fixed top-0 z-40 w-full border-b">
+    <header className="backdrop-blur-sm bg-white/30 fixed top-0 z-40 w-full border-b">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
         <Link href="/" className="flex items-center space-x-2">
           <Icons.logo className="h-6 w-6" />
