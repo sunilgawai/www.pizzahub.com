@@ -1,3 +1,4 @@
+import { ProductsList } from "@/components/products-list";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
@@ -38,6 +39,12 @@ export default function Home() {
             Menu
           </Toggle>
         </div>
+      </div>
+
+      <Separator className="my-6 border border-gray-300 h-[1px]" />
+
+      <div className="w-full">
+        <ProductsList />
       </div>
 
     </main>
