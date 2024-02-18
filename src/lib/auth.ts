@@ -48,5 +48,7 @@ export const authOptions: AuthOptions = {
             session.user = token.user;
             return session;
         },
-    }
+    },
+    secret: process.env.NEXTAUTH_JWT_SECRET
+    
 }

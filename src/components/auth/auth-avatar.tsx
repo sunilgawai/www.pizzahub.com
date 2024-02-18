@@ -28,7 +28,8 @@ const AuthAvatar = () => {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-9 w-9">
             <AvatarImage src={avatarImage} alt="@shadcn" />
-            <AvatarFallback>{avatarFallBackName}</AvatarFallback>
+            <AvatarFallback>{avatarFallBackName.toUpperCase()}</AvatarFallback>
+            
             {/* <AvatarFallback>
               `{session?.user.first_name?.charAt(0)}{" "}
               {session?.user.last_name?.charAt(0)}`
@@ -43,7 +44,7 @@ const AuthAvatar = () => {
               <p className="text-sm font-medium leading-none">
                 {session.user?.name}
               </p>
-              <p className="text-xs leading-none text-muted-foreground">
+              <p className="text-base leading-none text-muted-foreground">
                 {session.user?.email}
               </p>
             </div>
@@ -52,29 +53,35 @@ const AuthAvatar = () => {
         <DropdownMenuSeparator />
         {!session ? (
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link href="/signin">Login</Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href="/signup">Register</Link>
-            </DropdownMenuItem>
+            <Link href="/signin">
+              <DropdownMenuItem>
+                Login
+              </DropdownMenuItem>
+            </Link>
+            <Link href="/signup">
+              <DropdownMenuItem>
+                Register
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
         ) : (
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link href="/profile">Profile</Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>Toggle Theme</DropdownMenuItem>
+            <Link href="/profile">
+              <DropdownMenuItem>
+                Profile
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
         )}
+        {/* <DropdownMenuSeparator /> */}
+        {/* <ToggleTheme /> */}
         <DropdownMenuSeparator />
         {session && (
-          <DropdownMenuItem>
-            <Link href="/api/auth/signout">Log out</Link>
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <Link href="/api/auth/signout">
+            <DropdownMenuItem>
+              Log out
+            </DropdownMenuItem>
+          </Link>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

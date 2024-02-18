@@ -24,7 +24,7 @@ export function SiteHeader() {
               <div
                 className={buttonVariants({
                   size: "icon",
-                  variant: "outline",
+                  variant: "ghost",
                 })}
               >
                 <Icons.wishlist className="h-5 w-5" />
