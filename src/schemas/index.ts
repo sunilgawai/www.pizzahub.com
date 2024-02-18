@@ -15,3 +15,7 @@ export const RegisterSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
+
+export const userNameSchema = z.object({
+  name: z.string().min(3).max(32),
+})
