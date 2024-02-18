@@ -28,7 +28,7 @@ const CartPage = () => {
                 <Button variant="secondary" className='bg-green-600 uppercase' size="sm">go to checkout</Button>
             </div>
 
-            <Separator className='my-4' />
+            {/* <Separator className='my-4' />
 
             <h1 className="font-semibold">Your Saved For Later Items(1 Item)</h1>
             <Saved />
@@ -44,7 +44,7 @@ const CartPage = () => {
             <div>
                 <h1 className="font-semibold">Our social media</h1>
                 <div className="flex-1 h-40 bg-gray-300"></div>
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -66,7 +66,7 @@ const AuthAvatar = () => {
           </DropdownMenuGroup>
         ) : (
           <DropdownMenuGroup>
-            <Link href="/profile">
+            <Link href="/account">
               <DropdownMenuItem>
                 Profile
               </DropdownMenuItem>
