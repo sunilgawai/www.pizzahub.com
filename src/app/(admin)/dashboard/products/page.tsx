@@ -5,23 +5,23 @@ import { DashboardShell } from "@/components/shell";
 import { Button } from "@/components/ui/button";
 
 export const metadata = {
-  title: "Admin Orders",
+  title: "Admin Products",
 };
 
-export default async function DashboardPage() {
+export default async function ProductsPage() {
   return (
     <DashboardShell>
-      <DashboardHeader heading="Orders" text="Create and manage orders.">
-        <Button variant="outline">Create Orders</Button>
+      <DashboardHeader heading="Products" text="Create and manage products.">
+        <Button variant="outline">Create Products</Button>
       </DashboardHeader>
       <div>
         <EmptyPlaceholder>
           <EmptyPlaceholder.Icon name="post" />
-          <EmptyPlaceholder.Title>No orders availabled</EmptyPlaceholder.Title>
+          <EmptyPlaceholder.Title>No Category created</EmptyPlaceholder.Title>
           <EmptyPlaceholder.Description>
-            You don&apos;t have any order yet.
+            You don&apos;t have any category yet. Start creating content.
           </EmptyPlaceholder.Description>
-          <Button variant="outline">Create Orders</Button>
+          <Button variant="outline">Create Products</Button>
         </EmptyPlaceholder>
       </div>
     </DashboardShell>
