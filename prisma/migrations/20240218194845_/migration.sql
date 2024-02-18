@@ -34,7 +34,8 @@ CREATE TABLE "User" (
     "emailVerified" DATETIME,
     "phone" TEXT,
     "password" TEXT,
-    "image" TEXT
+    "image" TEXT,
+    "role" TEXT DEFAULT 'customer'
 );
 
 -- CreateTable

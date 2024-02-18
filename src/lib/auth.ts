@@ -41,7 +41,11 @@ export const authOptions: AuthOptions = {
     ],
     callbacks: {
         async jwt({token, user}) {
-            if(user) token.user = user as User;
+            if(user) {
+                // @ts-ignore
+                token.role = user.role
+                token.user = user as User;
+            }
             return token;
         },
         async session({token, session}) {
@@ -49,6 +53,6 @@ export const authOptions: AuthOptions = {
             return session;
         },
     },
-    secret: process.env.NEXTAUTH_JWT_SECRET
+    secret: process.env.NEXTAUTH_SECRET
     
 }
