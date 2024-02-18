@@ -8,13 +8,11 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import defaultAvatar from "@/styles/default-avatar.jpg";
 
 const AuthAvatar = () => {
   const { data: session } = useSession();

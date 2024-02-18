@@ -1,9 +1,12 @@
+"use client";
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import AuthAvatar from "./auth/auth-avatar";
 
 export function SiteHeader() {
+  const { data: session } = useSession();
   return (
     <header className="backdrop-blur-sm bg-white/30 fixed top-0 z-40 w-full border-b">
       <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
@@ -19,6 +22,14 @@ export function SiteHeader() {
             >
               Menus
             </Link>
+            {session && (
+              <Link
+                href={"/orders"}
+                className="flex items-center text-base font-semibold text-muted-foreground mx-4"
+              >
+                My Orders
+              </Link>
+            )}
             <Link href={"/wishlist"}>
               <div
                 className={buttonVariants({
