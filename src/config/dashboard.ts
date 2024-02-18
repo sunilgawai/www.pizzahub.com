@@ -14,6 +14,11 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
+      title: "Orders",
+      href: "/dashboard",
+      icon: "post",
+    },
+    {
       title: "Categories",
       href: "/dashboard/categories",
       icon: "post",
@@ -24,8 +29,13 @@ export const dashboardConfig: DashboardConfig = {
       icon: "post",
     },
     {
-      title: "Posts",
-      href: "/dashboard",
+      title: "Featured",
+      href: "/dashboard/featured",
+      icon: "post",
+    },
+    {
+      title: "Users",
+      href: "/dashboard/users",
       icon: "post",
     },
     {
