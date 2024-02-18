@@ -16,27 +16,27 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: "Orders",
       href: "/dashboard",
-      icon: "post",
+      icon: "orders",
     },
     {
       title: "Categories",
       href: "/dashboard/categories",
-      icon: "post",
+      icon: "dashboard",
     },
     {
       title: "Products",
       href: "/dashboard/products",
-      icon: "post",
+      icon: "pizza",
     },
     {
       title: "Featured",
       href: "/dashboard/featured",
-      icon: "post",
+      icon: "categories",
     },
     {
       title: "Users",
       href: "/dashboard/users",
-      icon: "post",
+      icon: "users",
     },
     {
       title: "Billing",
