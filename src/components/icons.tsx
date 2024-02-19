@@ -31,6 +31,7 @@ import {
   User2Icon,
   UserX2Icon,
   UsersIcon,
+  CogIcon,
   X,
   List
 } from "lucide-react";
@@ -57,6 +58,7 @@ export const Icons = {
   media: Image,
   settings: Settings,
   billing: CreditCard,
+  config: CogIcon,
   ellipsis: MoreVertical,
   add: Plus,
   warning: AlertTriangle,

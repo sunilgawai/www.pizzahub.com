@@ -29,6 +29,11 @@ export const dashboardConfig: DashboardConfig = {
       icon: "pizza",
     },
     {
+      title: "Config",
+      href: "/dashboard/config",
+      icon: "config",
+    },
+    {
       title: "Featured",
       href: "/dashboard/featured",
       icon: "categories",
