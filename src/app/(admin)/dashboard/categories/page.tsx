@@ -39,12 +39,15 @@ const categories = [
 export default async function CategoriesPage() {
   return (
     <DashboardShell>
-      <DashboardHeader heading="Categories" text="Create and manage categories.">
+      <DashboardHeader
+        heading="Categories"
+        text="Create and manage categories."
+      >
         <Button variant="outline">Create Category</Button>
       </DashboardHeader>
       <div>
-      <EmptyPlaceholder>
-          <CategoriesTable data={categories} columns={CategoriesColumns} />
+        <EmptyPlaceholder>
+          {/* <CategoriesTable data={categories} columns={CategoriesColumns} /> */}
         </EmptyPlaceholder>
         <EmptyPlaceholder>
           <EmptyPlaceholder.Icon name="post" />

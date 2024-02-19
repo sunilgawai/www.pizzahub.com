@@ -4,7 +4,7 @@ export default withAuth(
   // `withAuth` augments `Request` with the user's token.
   function middleware(req) {
     // console.log("request", req)
-    console.log(req.nextauth.token)
+    // console.log(req.nextauth.token)
   },
   {
     callbacks: {
