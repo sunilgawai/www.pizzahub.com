@@ -9,7 +9,7 @@ export default function Home() {
     <main className="container flex min-h-screen flex-col items-start justify-between p-24">
       <div className="flex flex-col justify-center items-start gap-6">
         <h1 className="text-6xl font-sans font-black">
-          Savor Delicious Pizza in Only
+          Order Delicious items in Only
           <span className="text-orange-500"> 45 Minutes!</span>
         </h1>
         <p className="font-sans font-semibold text-2xl">
