@@ -1,6 +1,7 @@
 import { EmptyPlaceholder } from "@/components/empty-placeholder";
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
+import { CategoriesColumns } from "@/components/tables/categories-column";
 import CategoriesTable from "@/components/tables/categories-table";
 import { Button } from "@/components/ui/button";
 
@@ -8,30 +9,35 @@ export const metadata = {
   title: "Admin Categories",
 };
 
-const categories = [
+const categories: {
+  id: number;
+  name: string;
+  image: string;
+  status: boolean;
+}[] = [
   {
     id: 1,
     name: "Pizzas",
-    icon: "🍕",
-    isActive: true,
+    image: "🍕",
+    status: true,
   },
   {
     id: 2,
     name: "Drinks",
-    icon: "🍷",
-    isActive: true,
+    image: "🍷",
+    status: true,
   },
   {
     id: 3,
     name: "Snacks",
-    icon: "🍟",
-    isActive: true,
+    image: "🍟",
+    status: true,
   },
   {
     id: 4,
     name: "Sea Food",
-    icon: "🦞",
-    isActive: true,
+    image: "🦞",
+    status: false,
   },
 ];
 
@@ -40,12 +46,12 @@ export default async function CategoriesPage() {
     <DashboardShell>
       <DashboardHeader
         heading="Categories"
-        text="Create and manage categories."
+        text="You can create and manage categories directly through the table."
       >
         <Button variant="outline">Create Category</Button>
       </DashboardHeader>
       {categories.length ? (
-        <CategoriesTable />
+        <CategoriesTable columns={CategoriesColumns} data={categories} />
       ) : (
         <EmptyPlaceholder>
           <EmptyPlaceholder.Icon name="post" />
@@ -53,7 +59,7 @@ export default async function CategoriesPage() {
           <EmptyPlaceholder.Description>
             You don&apos;t have any category yet. Start creating content.
           </EmptyPlaceholder.Description>
-          <Button variant="outline">Create</Button>
+          <Button variant="outline">Create Category</Button>
         </EmptyPlaceholder>
       )}
     </DashboardShell>
