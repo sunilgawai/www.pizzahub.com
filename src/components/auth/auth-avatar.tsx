@@ -64,6 +64,7 @@ const AuthAvatar = () => {
             <Link href="/signin">
               <DropdownMenuItem>Login</DropdownMenuItem>
             </Link>
+            
             <Link href="/signup">
               <DropdownMenuItem>Register</DropdownMenuItem>
             </Link>
