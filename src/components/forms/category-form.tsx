@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { categorySchema } from "@/schemas";
 import { Trash } from "lucide-react";
+import FileUpload from "../file-upload";
 import {
 	Form,
 	FormControl,
@@ -48,6 +49,8 @@ const CategoryForm = ({
 	const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
 	async function onSubmit(data: FormData) {
+		console.log("saving category", data);
+
 		setIsSaving(true);
 
 		const response = await fetch(`/api/users/${1}`, {
@@ -99,46 +102,65 @@ const CategoryForm = ({
 					onSubmit={categoriesForm.handleSubmit(onSubmit)}
 					className="space-y-8 w-full"
 				>
-					<div className="md:grid md:grid-cols-2 gap-8">
+					<div className="md:grid grid-rows-2 gap-2">
 						<FormField
 							control={categoriesForm.control}
-							name="name"
+							name="image"
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel>Name</FormLabel>
+									<FormLabel>Image</FormLabel>
 									<FormControl>
-										<Input
-											className="w-full border border-gray-200 py-2 px-4 font-light leading-tight"
-											disabled={loading}
-											placeholder="Category name"
-											{...field}
-										/>
+										<FileUpload {...field} />
 									</FormControl>
-									<FormMessage />
 								</FormItem>
 							)}
 						/>
-						<FormField
-							control={categoriesForm.control}
-							name="status"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Select Status</FormLabel>
-									<FormControl>
-										{/* <Input type="checkbox" disabled={loading} {...field} /> */}
-										{/* <Checkbox {...field} /> */}
-										<Toggle
-											aria-label="Toggle italic"
-											className="w-full border border-gray-200"
-										>
-											{/* <FontBoldIcon className="h-4 w-4" /> */}
-											Active now
-										</Toggle>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
-						/>
+						{/* <FileUpload /> */}
+						{/* <UploadDropzone onClientUploadComplete={(e) => console.log('file', e)} className="max-h-64" /> */}
+						{/* <UploadButton className="max-h-64" /> */}
+						<div className="md:grid md:grid-cols-2 gap-8 h-full">
+							<FormField
+								control={categoriesForm.control}
+								name="name"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Name</FormLabel>
+										<FormControl>
+											<Input
+												className="w-full border border-gray-200 py-2 px-4 font-light leading-tight"
+												disabled={loading}
+												placeholder="Category name"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={categoriesForm.control}
+								name="status"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Select Status</FormLabel>
+										<FormControl>
+											{/* <Input type="checkbox" disabled={loading} {...field} /> */}
+											{/* <Checkbox {...field} /> */}
+											<Toggle
+												aria-label="Toggle italic"
+												className="w-full border border-gray-200"
+												variant="outline"
+												size="sm"
+											>
+												{/* <FontBoldIcon className="h-4 w-4" /> */}
+												Active now
+											</Toggle>
+										</FormControl>
+										<FormMessage />
+									</FormItem>
+								)}
+							/>
+						</div>
 					</div>
 					{form_mode && form_mode === "create" ? (
 						<Button disabled={loading} className="ml-auto" type="submit">

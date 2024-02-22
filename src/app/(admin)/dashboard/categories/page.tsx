@@ -1,6 +1,5 @@
 "use client";
 import { EmptyPlaceholder } from "@/components/empty-placeholder";
-// import CategoryForm from "@/components/forms/category-form";
 import CategoryForm from "@/components/forms/category-form";
 import { DashboardHeader } from "@/components/header";
 import { DashboardShell } from "@/components/shell";
@@ -42,17 +41,9 @@ const categories: {
 	},
 ];
 
-type CategoriesPageProps = {
-	params: { slug: string };
-	searchParams: { [key: string]: string };
-};
-export default async function CategoriesPage({
-	params,
-	searchParams,
-}: CategoriesPageProps) {
+const CategoriesPage = () => {
 	const [form_mode, setFormMode] = useState<"create" | "update">("create");
 	const [form_visible, setFormVisible] = useState<boolean>(false);
-	console.log("props", { params, searchParams });
 	const router = useRouter();
 
 	return (
@@ -69,10 +60,9 @@ export default async function CategoriesPage({
 					<Button onClick={() => setFormVisible(!form_visible)}>
 						Cancel Operation
 					</Button>
-				)} 
+				)}
 			</DashboardHeader>
 
-			{/* {searchParams?.mode?.includes('create') && <ProductForm initialData={{}} />} */}
 			{form_visible && <CategoryForm form_mode={form_mode} />}
 
 			{categories.length ? (
@@ -91,4 +81,6 @@ export default async function CategoriesPage({
 			)}
 		</DashboardShell>
 	);
-}
+};
+
+export default CategoriesPage;
