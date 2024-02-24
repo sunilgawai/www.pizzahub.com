@@ -1,38 +1,38 @@
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
-  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+    // shadowDatabaseUrl = env("SHADOW_DATABASE_URL") // Only needed when using a cloud provider that doesn't support the creation of new databases, like Heroku. Learn more: https://pris.ly/d/migrate-shadow
 }
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? //@db.Text
-  access_token      String? //@db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? //@db.Text
-  session_state     String?
+    id                String  @id @default(cuid())
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String? //@db.Text
+    access_token      String? //@db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? //@db.Text
+    session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([provider, providerAccountId])
+    @@unique([provider, providerAccountId])
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    id           String   @id @default(cuid())
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // enum Role {
@@ -42,24 +42,213 @@ model Session {
 // }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  first_name    String?
-  last_name     String?
-  email         String?   @unique
-  emailVerified DateTime?
-  phone         String?
-  password      String?
-  image         String?
-  role          String? @default("customer")
-  accounts      Account[]
-  sessions      Session[]
+    id            String    @id @default(cuid())
+    name          String?
+    first_name    String?
+    last_name     String?
+    email         String?   @unique
+    emailVerified DateTime?
+    phone         String?
+    password      String?
+    image         String?
+    role          String?   @default("customer")
+    accounts      Account[]
+    sessions      Session[]
+    Order         Order[]
 }
 
 model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
+    identifier String
+    token      String   @unique
+    expires    DateTime
 
-  @@unique([identifier, token])
+    @@unique([identifier, token])
+}
+
+// Application Schemas.
+
+model Category {
+    id              String       @id @default(cuid())
+    name            String
+    image           Image?       @relation(fields: [imageId], references: [id])
+    icon            String?
+    status          Boolean      @default(true)
+    desciption      String
+    sub_category    SubCategory? @relation(fields: [sub_category_id], references: [id])
+    sub_category_id String?
+    imageId         String?
+    Product         Product?     @relation(fields: [productId], references: [id])
+    productId       String?
+    Coupon          Coupon?      @relation(fields: [couponId], references: [id])
+    couponId        String?
+}
+
+model SubCategory {
+    id          String     @id @default(cuid())
+    name        String
+    description String
+    Category    Category[]
+    Product     Product[]
+}
+
+// English: Warranty
+model VariantName {
+    id             String         @id @default(cuid())
+    name           String
+    variant_values VariantValue[]
+    description    String?
+    Product        Product?       @relation(fields: [productId], references: [id])
+    productId      String?
+}
+
+// English: 3 Months, 6 Months, 9 Months, 12 Months, 24 Months, 36 Months, 1 Month, 18 Months, 11 Months, 10 Months Brand Warranty,
+model VariantValue {
+    id              String       @id @default(cuid())
+    value           String
+    variant_name    VariantName? @relation(fields: [variant_name_id], references: [id])
+    variant_name_id String?
+    Product         Product?     @relation(fields: [productId], references: [id])
+    productId       String?
+}
+
+model Description {
+    id           String         @id @default(cuid())
+    value        String
+    Product      Product[]
+    Coupon       Coupon[]
+    Notification Notification[]
+}
+
+model Image {
+    id           String         @id @default(cuid())
+    url          String
+    Product      Product?       @relation(fields: [productId], references: [id])
+    productId    String?
+    Category     Category[]
+    Notification Notification[]
+}
+
+model Product {
+    id                    String         @id @default(cuid())
+    title                 String
+    thumbnail             String
+    price                 Float
+    discountPercentage    Float?
+    rating                Float
+    stock                 BigInt
+    product_type          String?
+    is_featured           Boolean        @default(false)
+    status                Boolean        @default(true)
+    min_order_limit       Int
+    max_order_limit       Int
+    product_weight        Float?
+    product_weight_metrix String?
+    flash_sale            Boolean        @default(false)
+    special               Boolean        @default(false)
+    variants              VariantName[]
+    variants_values       VariantValue[]
+    description           Description?   @relation(fields: [descriptionId], references: [id])
+    descriptionId         String?
+    categories            Category[]
+    // category           Category       @relation(fields: [category_id], references: [id])
+    // category_id        String
+    sub_category          SubCategory    @relation(fields: [sub_category_id], references: [id])
+    sub_category_id       String
+    images                Image[]
+    Stock                 Stock[]
+    Coupon                Coupon?        @relation(fields: [couponId], references: [id])
+    couponId              String?
+}
+
+model Order {
+    id               String   @id @default(cuid())
+    customer_name    String
+    customer         User?    @relation(fields: [userId], references: [id])
+    email            String
+    phone            String
+    order_total      Float
+    order_date       DateTime @default(now())
+    payment_method   String
+    Subtotal         Float
+    tax              Float
+    shipping_cost    Float
+    status           String // pending, completed, cancelled, returned, paid, shipped
+    comment          String?
+    shipping_address String
+    billing_address  String
+    userId           String?
+}
+
+// Inventry Schemas
+
+model Stock {
+    id                   String   @id @default(cuid())
+    product              Product? @relation(fields: [productId], references: [id])
+    current_stock        BigInt
+    min_level            Int
+    max_level            BigInt
+    total_purchase_price BigInt
+    productId            String?
+}
+
+//options name from Product Option inside of Product menu in case of empty options.
+model Option {
+    id     String @id @default(cuid())
+    name   String
+    value  String
+    price  Float
+    action String
+}
+
+// 1	RA123	Fixed Cart	Rs1000	Flat Discount	22/04/2020
+model Coupon {
+    id                      String       @id @default(cuid())
+    code                    String
+    type                    String
+    amount                  Float
+    allow_free_shipping     Boolean      @default(false)
+    minimum_spend           Float
+    maximum_spend           Float
+    exclude_sales_item      Boolean      @default(true)
+    products                Product[] // List of product the coupon can be used on.
+    categories              Category[]
+    ussage_limit_per_coupon Int? // How many times the coupon can be used in total.
+    ussage_limit_per_user   Int? // How many times the coupon can be used per customer
+    description             Description? @relation(fields: [descriptionId], references: [id])
+    descriptionId           String?
+    expiry_date             DateTime?
+    // exclude_products            Product[] // List of product the coupon cannot be used on.
+    // exclude_categories            Product[] // List of product the coupon cannot be used on.
+}
+
+model Notification {
+    id            String      @id @default(cuid())
+    status        Boolean     @default(true)
+    title         String
+    image         Image?      @relation(fields: [imageId], references: [id])
+    imageId       String?
+    message       Description @relation(fields: [descriptionId], references: [id])
+    descriptionId String
+}
+
+model ShippingMethod {
+    id      String  @id @default(cuid())
+    title   String
+    status  Boolean @default(true)
+    default Boolean @default(false)
+}
+
+model PaymentMethod {
+    id      String  @id @default(cuid())
+    name    String
+    status  Boolean @default(true)
+    default Boolean @default(false)
+}
+
+model Admins {
+    id     String  @id @default(cuid())
+    name   String
+    email  String
+    type   String
+    status Boolean @default(true)
 }
