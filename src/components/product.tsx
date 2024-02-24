@@ -1,15 +1,13 @@
-import React from 'react'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
-import Image from 'next/image'
 import demoImg from '@/assets/corousel-img-1.jpg'
+import Image from 'next/image'
+import Link from "next/link"
 import { Button } from './ui/button'
-import Link from "next/link";
-import { Separator } from './ui/separator'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
 
 const Product = () => {
     return (
         <Link href={"/products"}>
-            <Card className='pt-2 rounded-none border-none'>
+            <Card className='pt-2 rounded-none border-none bg-transparent'>
                 <CardHeader className='w-full flex flex-row items-center justify-between'>
                     <div className="border-2">
                         <div className="bg-green-500 w-3 h-3 rounded-full"></div>

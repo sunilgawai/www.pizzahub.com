@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
+import "@/styles/home.css";
 import { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import AppProvider from "./provider";

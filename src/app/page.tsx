@@ -3,10 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Toggle } from "@/components/ui/toggle";
 import { FilterIcon, SortDescIcon } from "lucide-react";
+import mainBackgroundImage from "@/assets/home-background.webp";
 
 export default function Home() {
 	return (
-		<main className="container flex min-h-screen flex-col items-start justify-between p-24">
+		<main
+			className="container flex min-h-screen flex-col items-start justify-between p-24 background-image"
+		>
 			<div className="flex flex-col justify-center items-start gap-6">
 				<h1 className="text-6xl font-sans font-black">
 					Order Delicious items in Only
